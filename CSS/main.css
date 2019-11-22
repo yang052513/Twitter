@@ -1,0 +1,345 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    outline: none;
+}
+
+/* 主要容器，包括导航栏，主要内容，趋势 */
+.container {
+    display: grid;
+    grid-template-columns: 25% 40% 35%;
+}
+
+/* 左侧导航栏 */
+.left-nav-bar {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    padding: 10px 0 0 0;
+}
+
+/* 推特logo */
+.twitter-logo {
+    width: auto;
+    height: 30px;
+    margin: 0 20px;
+}
+
+/* 导航栏图标和文字整合的容器 */
+.nav-bar-item-wrap {
+    display: flex;
+    margin: 25px 20px;
+}
+
+/* 侧边导航栏图标 */
+.nav-bar-icon {
+    width: auto;
+    height: 25px;
+}
+
+#user-profile {
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+/* 侧边导航栏文字 */
+.nav-bar-text{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 0 20px;
+}
+
+/* 侧边导航栏推文按钮 */
+#post-twitter {
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(29,161,242,1.00);
+    border: none;
+    margin-top: 20px;
+}
+
+/* 中间主要内容展示容器 */
+.center-main-content {
+    border: 1px solid rgb(193, 193, 193);
+}
+
+.main-title-text {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 15px;
+    border-bottom: 1px solid rgb(193, 193, 193);
+}
+
+.post-twitter-block {
+    border-bottom: 1px solid rgb(193, 193, 193);
+    height: 150px;
+    padding: 20px 15px;
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-template-rows: 100px 40px;
+}
+
+.current-user {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgb(193, 193, 193);
+}
+
+#user-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+    resize: none;
+}
+
+#user-input:focus {
+    outline:none;
+}
+
+.user-post-btn {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: rgba(29,161,242,1.00);
+    border: 1px solid rgba(29,161,242,1.00);
+    margin-top: 20px;
+}
+
+.user-post-btn:hover {
+    color: white;
+    background-color: rgba(29,161,242,1.00);
+    border: none;
+}
+
+/* append用户的post */
+.user-post {
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+}
+
+.user-post-wrap {
+    display: flex;
+    padding: 10px 15px;
+}
+
+.user-img-wrap {
+    text-align: center;
+}
+
+.user-post-nickname, .user-post-time {
+    font-size: 14px;
+    font-weight: normal;
+    padding-left: 10px;
+    color: grey;
+}
+
+.user-post-content {
+    margin-left: 10px;
+    line-height: 1.5em;
+}
+
+.user-post-img {
+    width: auto;
+    height: 250px;
+    border-radius: 15px;
+}
+.current-user-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user-tweet {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.user-post-sc {
+    width: auto;
+    height: 25px;
+}
+
+/* 右侧趋势 关注 */
+/* 搜索栏 */
+.search-bar {
+    width: 300px;
+    height: 40px;
+    background-color: #eee;
+    border-radius: 20px;
+    border: none;
+    margin: 20px 30px;
+    padding: 0 20px;
+}
+
+/* 你的趋势 */
+.trend-block {
+    background-color: rgb(242, 241, 241);
+    margin: 5px 30px 20px 30px;
+    border-radius: 20px;
+    width: 70%;
+    padding: 10px 15px;
+}
+
+.trend-block-item {
+    border-bottom: 1px solid rgb(211, 211, 211);
+    border-top: 1px solid rgb(232, 232, 232);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.trend-block-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.trend-block-where {
+    font-size: 12px;
+    color: rgb(161, 161, 161);
+}
+
+.trend-block-tag {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.trend-block-post {
+    color: rgb(118, 118, 118);
+    font-size: 12px;
+}
+
+/* 推荐关注 */
+.recommendation-block {
+    background-color: rgb(242, 241, 241);
+    margin: 5px 30px 50px 30px;
+    border-radius: 20px;
+    width: 70%;
+    padding: 10px 15px;
+}
+
+.recommend-item {
+    display: flex;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    border-top: 1px solid rgb(232, 232, 232);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.recommend-text-wrap {
+    padding-left: 20px;
+}
+
+.recommend-item-name {
+    font-weight: bold;
+}
+
+.recommend-item-at {
+    color: rgb(154, 152, 152);
+    font-size: 13px;
+}
+
+.user-subscribe-btn {
+    width: 70px;
+    height: 30px;
+    border: 1px solid rgb(52, 150, 211);
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+    color: rgb(52, 150, 211);
+    margin-left: auto;
+
+}
+
+.recommend-user {
+    border-radius: 50%;
+    width: auto;
+    height: 60px;
+}
+
+/* 个人资料部分 */
+.user-profile-container {
+    display: none;
+}
+
+.user-profile-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-profile-form {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    filter: drop-shadow(5px 5px 5px #676666);
+    border-radius: 30px;
+}
+
+.form-header {
+    display: flex;
+    padding: 20px 20px;
+}
+
+.form-header p{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#save-profile-btn {
+    margin-left: auto;
+    width: 70px;
+    height: 30px;
+    font-size: 12px;
+    border: 1px solid rgb(52, 150, 211);
+    color: rgb(52, 150, 211);
+    border-radius: 20px;
+}
+
+.form-content {
+    display: grid;
+    justify-content: center;
+}
+
+.form-content p{
+    text-align: center;
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+#change-profile-pic {
+    border-radius: 50%;
+    border: 1px solid #eee;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.form-input {
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid rgb(52, 150, 211);
+}
