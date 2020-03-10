@@ -1,8 +1,8 @@
 # Twitter 
 
-A web based app allows users to share contents with other people. The layout was originated from Twitter.ca for practice use only
+A twitter like web app which allows users share contents, image to the platform that all other people can read.
 
 ## Version Log
 ### 0.0.1
-- User login, share contents
+
 

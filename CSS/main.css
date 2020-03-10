@@ -19,18 +19,32 @@ button {
     outline: none;
 }
 
-/* 主要容器，包括导航栏，主要内容，趋势 */
-.container {
-    display: grid;
-    grid-template-columns: 25% 40% 35%;
+input[type="file"] {
+    display: none;
 }
 
 /* 左侧导航栏 */
 .left-nav-bar {
+    width: 25%;
+    position: fixed;
+
     display: grid;
     justify-items: center;
     margin: 0;
     padding: 10px 0 0 0;
+}
+
+.center-main-content {
+    border: 1px solid rgb(193, 193, 193);
+
+    position: absolute;
+    left: 25%;
+    width: 40%;
+}
+
+.right-news {
+    position: absolute;
+    left: 65%;
 }
 
 /* 推特logo */
@@ -65,6 +79,8 @@ button {
 #user-profile {
     border-radius: 50%;
     border: 1px solid black;
+    width: 27px;
+    height: 27px;
 }
 
 /* 侧边导航栏文字 */
@@ -92,13 +108,10 @@ button {
     color: rgba(29, 161, 242, 1.00);
     background-color: white;
     border: 1px solid rgba(29, 161, 242, 1.00);
+    cursor: pointer;
 }
 
 /* 中间主要内容展示容器 */
-.center-main-content {
-    border: 1px solid rgb(193, 193, 193);
-}
-
 .main-title-text {
     font-size: 20px;
     font-weight: bold;
@@ -113,10 +126,18 @@ button {
     display: grid;
     grid-template-columns: 80px auto;
     grid-template-rows: 100px 40px;
+    position: relative;
 }
 
 .current-user {
-    width: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgb(193, 193, 193);
+}
+
+#user-profile-top {
+    width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 1px solid rgb(193, 193, 193);
@@ -133,6 +154,14 @@ button {
 #user-input:focus {
     outline: none;
 }
+
+#upload-image-tweet {
+    font-size: 30px;
+    color: rgba(29, 161, 242, 1.00);
+    margin-top: 22px;
+    margin-left: 20px;
+}
+
 
 .user-post-btn {
     width: 80px;
@@ -153,7 +182,7 @@ button {
 
 /* append用户的post */
 .user-post {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(193,193,193);
     padding-bottom: 20px;
     transition: background-color 0.2s;
 }
@@ -177,6 +206,7 @@ button {
     font-weight: normal;
     padding-left: 10px;
     color: grey;
+    font-family: 'Abel', sans-serif;
 }
 
 .user-post-content {
@@ -205,6 +235,45 @@ button {
     width: auto;
     height: 25px;
 }
+
+/* like css */
+/* .heart {
+    cursor: pointer;
+    height: 55px;
+    width: 60px;
+    background-image:url( 'https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png');
+    background-position: left;
+    background-repeat:no-repeat;
+    background-size:2900%;
+    transform: translate(30px, -20px);
+  }
+  
+  .heart:hover {
+    background-position:right;
+  }
+  
+  .is_animating {
+    animation: heart-burst .8s steps(28) 1;
+  }
+  
+  @keyframes heart-burst {
+    from {background-position:left;}
+    to { background-position:right;}
+  } */
+
+
+#image-input {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+
+}
+
+/* #upload-image {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+} */
 
 /* 右侧趋势 关注 */
 /* 搜索栏 */
@@ -307,6 +376,27 @@ button {
     display: none;
 }
 
+#change-profile-icon {
+    font-size: 40px;
+    position: absolute;
+    top: 100px;
+    left: 180px;
+    display: none;
+}
+
+#exit-profile {
+    margin-right: 5px;
+}
+
+#exit-profile-header {
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
+#exit-profile-header:hover {
+    color: rgba(29, 161, 242, 1.00);
+}
+
 .user-profile-modal {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
@@ -345,11 +435,18 @@ button {
     border: 1px solid rgb(52, 150, 211);
     color: rgb(52, 150, 211);
     border-radius: 20px;
+    transition: color 0.5s, background-color 0.5s, border 0.5s;
+}
+
+#save-profile-btn:hover {
+    color: white;
+    background-color:rgb(52, 150, 211);
+    border: none;
 }
 
 .form-content {
     display: grid;
-    justify-content: center;
+    justify-items: center;
 }
 
 .form-content p {
@@ -362,13 +459,13 @@ button {
     border-radius: 50%;
     border: 1px solid #eee;
     margin: 0 auto;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 
 .form-input {
     width: 150px;
     height: 25px;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid rgb(52, 150, 211);
 }
 
@@ -396,9 +493,22 @@ button {
 /* For screen smaller than 1200px Disable trending and following section */
 /* -----------------------------------------------------------*/
 @media screen and (max-width: 1200px) {
-    .container {
+    /* .container {
         display: grid;
         grid-template-columns: 10% 55% 35%;
+    } */
+
+    .left-nav-bar {
+        width: 10%;
+    }
+    
+    .center-main-content {
+        left: 10%;
+        width: 50%;
+    }
+    
+    .right-news {
+        left: 60%;
     }
 
     .nav-bar-text {
@@ -413,30 +523,30 @@ button {
 /* -----------------------------------------------------------*/
 /* For screen smaller than 850px Disable trending and following section */
 /* -----------------------------------------------------------*/
-@media screen and (max-width: 850px) {
-    .container {
-        display: grid;
-        grid-template-columns: 10% 90%;
-    }
-
+@media screen and (max-width: 950px) {
     .right-news {
         display: none;
+    }
+
+    .center-main-content {
+        left: 10%;
+        width: 80%;
     }
 }
 
 /* -----------------------------------------------------------*/
 /* For screen smaller than 550px Disable trending and following section */
 /* -----------------------------------------------------------*/
-@media screen and (max-width: 550px) {
-    .container {
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-
+@media screen and (max-width: 650px) {
     .left-nav-bar {
         display: none;
     }
 
+    .center-main-content {
+        left: 0;
+        width: 100%;
+    }
+    
     .mobile-navbar {
         visibility: visible;
     }

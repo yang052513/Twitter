@@ -9,6 +9,7 @@
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-storage.js"></script>
     <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-analytics.js"></script>
     <!-- Add Firebase products that you want to use -->
@@ -22,6 +23,7 @@
 
     <link rel="stylesheet" href="CSS/main.css" />
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
     <link rel="icon" href="Resource/logo.png">
     <link rel="shortcut icon" href="Resource/logo.png">
     <title>Twitter</title>
@@ -35,32 +37,26 @@
                 <img class="twitter-logo" src="Resource/logo.png">
                 <!-- flex并排显示图标和文字 -->
                 <div class="nav-bar-item-wrap">
-                    <!-- <img class="nav-bar-icon" src="Resource/home.png"> -->
                     <i class="fas fa-home"></i>
                     <p class="nav-bar-text">Home</p>
                 </div>
                 <div class="nav-bar-item-wrap">
                     <i class="fas fa-hashtag"></i>
-                    <!-- <img class="nav-bar-icon" src="Resource/hashtag.png"> -->
                     <p class="nav-bar-text">Explore</p>
                 </div>
                 <div class="nav-bar-item-wrap">
                     <i class="far fa-bell"></i>
-                    <!-- <img class="nav-bar-icon" src="Resource/notification.png"> -->
                     <p class="nav-bar-text">Notification</p>
                 </div>
                 <div class="nav-bar-item-wrap">
-                    <!-- <img class="nav-bar-icon" src="Resource/email.png"> -->
                     <i class="far fa-envelope"></i>
                     <p class="nav-bar-text">Message</p>
                 </div>
                 <div class="nav-bar-item-wrap">
-                    <!-- <img class="nav-bar-icon" src="Resource/bookmark.png"> -->
                     <i class="far fa-bookmark"></i>
                     <p class="nav-bar-text">Bookmark</p>
                 </div>
                 <div class="nav-bar-item-wrap">
-                    <!-- <img class="nav-bar-icon" src="Resource/list.png"> -->
                     <i class="fas fa-list"></i>
                     <p class="nav-bar-text">List</p>
                 </div>
@@ -69,12 +65,11 @@
                     <p id="personal-info" class="nav-bar-text">Profile</p>
                 </div>
                 <div class="nav-bar-item-wrap">
-                    <!-- <img class="nav-bar-icon" src="Resource/more.png"> -->
                     <i class="fas fa-info-circle"></i>
                     <p class="nav-bar-text">More</p>
                 </div>
                 <div class="nav-bar-post-btn">
-                    <button id="post-twitter">推文</button>
+                    <button id="post-twitter">Tweet</button>
                 </div>
             </div>
         </div>
@@ -82,39 +77,20 @@
         <!-- 中心展示post区域 -->
         <div class="center-main-content">
             <div class="main-title-bar">
-                <p class="main-title-text">主页</p>
+                <p class="main-title-text">Welcome back <span class="user-name"></span></p>
             </div>
 
             <div class="post-twitter-block">
-                <img class="current-user" src="Resource/user.jpg" width="auto" height="50px">
+                <img id="user-profile-top" src="Resource/user.jpg" width="auto" height="50px">
                 <textarea id="user-input" placeholder="What's happening？"></textarea>
-                <button id="post-btn" class="user-post-btn">推文</button>
+                <button id="post-btn" class="user-post-btn">Tweet</button>
+                <input type = "file" id="image-input">
+                <label id="upload-image-tweet" class="file-input-label" for="image-input"><i class="far fa-image"></i></label>
             </div>
 
             <!-- Javascript append新的tweet部分 -->
             <div id="post-container">
-                <!-- <div class="user-post">
-                    <div class="user-post-wrap">
-                        <img class="current-user" src="Resource/user.jpg">
-                        <div class="user-post-content">
-                            <p class="current-user-name"><span class="user-post-name">Kageyama Tobio</span><span
-                                    class="user-post-nickname">@コート上の王様</span><span class="user-post-time">11月20日</span>
-                            </p>
-                            <p class="current-user-post">We are going to national!!! Tokyo! Here we come！</p>
-                        </div>
-                    </div>
-
-                    <div class="user-img-wrap">
-                        <img class="user-post-img" src="Resource/post-img.jpg">
-                    </div>
-
-                    <div class="user-tweet">
-                        <img class="user-post-sc" src="Resource/comment.png">
-                        <img class="user-post-sc" src="Resource/retweet.png">
-                        <img class="user-post-sc" src="Resource/like.png">
-                        <img class="user-post-sc" src="Resource/upload.png">
-                    </div>
-                </div> -->
+ 
             </div>
             <!-- Javascript append新的tweet部分 -->
 
@@ -194,15 +170,19 @@
         <div class="user-profile-modal">
             <div class="user-profile-form">
                 <div class="form-header">
-                    <p>编辑个人资料</p>
+                    <p id="exit-profile-header"><i id="exit-profile" class="fas fa-arrow-left"></i>编辑个人资料</p>
                     <button id="save-profile-btn">保存</button>
                 </div>
                 <div class="form-content">
-                    <img id="change-profile-pic" src="Resource/user.jpg" width="auto" height="100px">
+                    <img id="change-profile-pic" src="Resource/user.jpg" width="100px" height="100px">
+                   
                     <p>全名：</p>
                     <input type="text" class="form-input" id="user-name-input">
                     <p>昵称：</p>
                     <input type="text" class="form-input" id="user-nickname-input">
+
+                    <input type ="file" id="user-profile-upload">
+                    <label for="user-profile-upload"><i id="change-profile-icon" class="fas fa-camera"></i></label>
                 </div>
             </div>
         </div>
