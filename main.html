@@ -56,9 +56,9 @@
                     <i class="far fa-bookmark"></i>
                     <p class="nav-bar-text">Bookmark</p>
                 </div>
-                <div class="nav-bar-item-wrap">
-                    <i class="fas fa-list"></i>
-                    <p class="nav-bar-text">List</p>
+                <div id="logout-btn" class="nav-bar-item-wrap">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p class="nav-bar-text">Logout</p>
                 </div>
                 <div class="nav-bar-item-wrap">
                     <img id="user-profile" class="nav-bar-icon" src="Resource/user.jpg">
@@ -83,14 +83,19 @@
             <div class="post-twitter-block">
                 <img id="user-profile-top" src="Resource/user.jpg" width="auto" height="50px">
                 <textarea id="user-input" placeholder="What's happening？"></textarea>
+                
                 <button id="post-btn" class="user-post-btn">Tweet</button>
                 <input type = "file" id="image-input">
                 <label id="upload-image-tweet" class="file-input-label" for="image-input"><i class="far fa-image"></i></label>
+
+                <i id="emoji" class="far fa-laugh"></i>
+                <input type = "text" id="tag-input" placeholder="#hashtag aka">
+
+                <div class="tag-placeholder"></div>
             </div>
 
             <!-- Javascript append新的tweet部分 -->
             <div id="post-container">
- 
             </div>
             <!-- Javascript append新的tweet部分 -->
 
@@ -101,66 +106,14 @@
             <input class="search-bar" type="text" placeholder="搜索 Twitter">
 
             <div class="trend-block">
-                <p class="trend-block-title">你的趋势</p>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#RIP Jake</p>
-                    <p class="trend-block-post">2,055 推文</p>
-                </div>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#WhitePrivilege</p>
-                    <p class="trend-block-post">1,455 推文</p>
-                </div>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#JT Miller</p>
-                    <p class="trend-block-post">1,355 推文</p>
-                </div>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#Battle of 2D girl</p>
-                    <p class="trend-block-post">1,055 推文</p>
-                </div>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#RIP YANG</p>
-                    <p class="trend-block-post">1,015 推文</p>
-                </div>
-                <div class="trend-block-item">
-                    <p class="trend-block-where">加拿大 的趋势</p>
-                    <p class="trend-block-tag">#CST DEAD</p>
-                    <p class="trend-block-post">1,005 推文</p>
-                </div>
+                <p class="trend-block-title">Trends for you</p>
+                 <!-- JS DOM append -->
             </div>
 
             <!-- 推荐关注 -->
             <div class="recommendation-block">
-                <p class="trend-block-title">推荐关注</p>
-                <div class="recommend-item">
-                    <img class="recommend-user" src="Resource/profile-1.jpg" width="auto" height="100px">
-                    <div class="recommend-text-wrap">
-                        <p class="recommend-item-name">志摩 リン</p>
-                        <p class="recommend-item-at">@しま リン</p>
-                    </div>
-                    <button class="user-subscribe-btn">关注</button>
-                </div>
-                <div class="recommend-item">
-                    <img class="recommend-user" src="Resource/profile-2.jpg" width="auto" height="100px">
-                    <div class="recommend-text-wrap">
-                        <p class="recommend-item-name">ひなた かほ</p>
-                        <p class="recommend-item-at">@hinatadesu</p>
-                    </div>
-                    <button class="user-subscribe-btn">关注</button>
-                </div>
-                <div class="recommend-item">
-                    <img class="recommend-user" src="Resource/profile-3.jpg" width="auto" height="100px">
-                    <div class="recommend-text-wrap">
-                        <p class="recommend-item-name">榊 涼子</p>
-                        <p class="recommend-item-at">@sakakirr</p>
-                    </div>
-                    <button class="user-subscribe-btn">关注</button>
-                </div>
+                <p class="trend-block-title">Twitter Members</p>
+                <!-- JS DOM append -->
             </div>
         </div>
     </div>
