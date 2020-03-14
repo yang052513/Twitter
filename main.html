@@ -28,6 +28,7 @@
     <link rel="shortcut icon" href="Resource/logo.png">
     <title>Twitter</title>
 </head>
+
 <body>
     <!-- 主要显示容器，包括侧边固定导航栏，中心post，右边其他信息栏 -->
     <div class="container">
@@ -36,7 +37,7 @@
             <div class="nav-bar-container">
                 <img class="twitter-logo" src="Resource/logo.png">
                 <!-- flex并排显示图标和文字 -->
-                <div class="nav-bar-item-wrap">
+                <div id="current-page">
                     <i class="fas fa-home"></i>
                     <p class="nav-bar-text">Home</p>
                 </div>
@@ -64,7 +65,7 @@
                     <img id="user-profile" class="nav-bar-icon" src="Resource/user.jpg">
                     <p id="personal-info" class="nav-bar-text">Profile</p>
                 </div>
-                <div class="nav-bar-item-wrap">
+                <div id="info-btn" class="nav-bar-item-wrap">
                     <i class="fas fa-info-circle"></i>
                     <p class="nav-bar-text">More</p>
                 </div>
@@ -83,15 +84,22 @@
             <div class="post-twitter-block">
                 <img id="user-profile-top" src="Resource/user.jpg" width="auto" height="50px">
                 <textarea id="user-input" placeholder="What's happening？"></textarea>
-                
+
                 <button id="post-btn" class="user-post-btn">Tweet</button>
-                <input type = "file" id="image-input">
-                <label id="upload-image-tweet" class="file-input-label" for="image-input"><i class="far fa-image"></i></label>
+                <input type="file" id="image-input">
+                <label id="upload-image-tweet" class="file-input-label" for="image-input"><i
+                        class="far fa-image"></i></label>
 
                 <i id="emoji" class="far fa-laugh"></i>
-                <input type = "text" id="tag-input" placeholder="#hashtag aka">
+                <input type="text" id="tag-input" placeholder="#hashtag aka">
 
                 <div class="tag-placeholder"></div>
+            </div>
+
+            <!-- 表情包 -->
+            <div id="emoji-modal-wrap" class="close-emoji">
+                <div id="emoji-modal">
+                </div>
             </div>
 
             <!-- Javascript append新的tweet部分 -->
@@ -103,11 +111,11 @@
 
         <!-- 右侧搜索，趋势，推荐关注，条款 固定-->
         <div class="right-news">
-            <input class="search-bar" type="text" placeholder="搜索 Twitter">
+            <input class="search-bar" type="text" placeholder="Search Twitter">
 
             <div class="trend-block">
                 <p class="trend-block-title">Trends for you</p>
-                 <!-- JS DOM append -->
+                <!-- JS DOM append -->
             </div>
 
             <!-- 推荐关注 -->
@@ -123,21 +131,55 @@
         <div class="user-profile-modal">
             <div class="user-profile-form">
                 <div class="form-header">
-                    <p id="exit-profile-header"><i id="exit-profile" class="fas fa-arrow-left"></i>编辑个人资料</p>
-                    <button id="save-profile-btn">保存</button>
+                    <p id="exit-profile-header"><i id="exit-profile" class="fas fa-arrow-left"></i>Edit Profile</p>
+                    <button id="save-profile-btn">Save</button>
                 </div>
                 <div class="form-content">
                     <img id="change-profile-pic" src="Resource/user.jpg" width="100px" height="100px">
-                   
-                    <p>全名：</p>
+
+                    <p>Name：</p>
                     <input type="text" class="form-input" id="user-name-input">
-                    <p>昵称：</p>
+                    <p>Nickname：</p>
                     <input type="text" class="form-input" id="user-nickname-input">
 
-                    <input type ="file" id="user-profile-upload">
+                    <input type="file" id="user-profile-upload">
                     <label for="user-profile-upload"><i id="change-profile-icon" class="fas fa-camera"></i></label>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 作者信息 author information modal -->
+    <div id="author-info-modal">
+        <div id="author-info-modal-content">
+            <i id="exit-info" class="far fa-times-circle"></i>
+            <img src="Resource/user.jpg" width="100px" height="100px">
+            <p>Hello, this is Yang. The idea of the app is to create a social media application like twitter which people could share stuff to the internet.</p>
+
+            <!-- 社交软件follow icon并排显示 -->
+            <div class="intro-sc-icon">
+                <a class="btn" href="https://yangliweb.firebaseapp.com">
+                    <i class="fab fa-steam"></i>
+                </a>
+                <a class="btn" href="https://www.instagram.com/yang05_li/?hl=en">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="btn" href="https://github.com/yang052513">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="btn" href="https://www.linkedin.com/in/yangliWeb">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 当用户输入空的信息时 提示modal -->
+    <div id="zero-msg-modal">
+        <div id="zero-msg-modal-content">
+            <img src="Resource/emoji-nomsg.png" width="100px" height="auto">
+            <p>Say something?</p>
+            <button id="zero-msg-btn">OK~</button>
         </div>
     </div>
 
@@ -149,8 +191,8 @@
         <img src="Resource/more.png">
     </div>
 
-    <!-- 脚本 -->
 
+    <!-- 脚本 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="JS/main.js"></script>
 

@@ -69,6 +69,7 @@ $(document).ready(function () {
             .doc(user.uid)
             .set({
                 "email": user.email,
+                "name": user.displayName,
             }, {
                 merge: true
             });
@@ -82,6 +83,20 @@ $(document).ready(function () {
                 var tweet_username = change.doc.data().Name;
                 var tweet_usernickname = change.doc.data().Nickname;
                 var tweet_userProfile = change.doc.data().Profile;
+                var tweet_likecnt = change.doc.data().Like;
+                var tweet_like;
+
+                if (tweet_likecnt == 0) {
+                    tweet_like = $("<div class=tweet-like>" +
+                        "<i class='like-gray far fa-heart'></i>" +
+                        "<span class=like-count></span>" +
+                        "</div>");
+                } else {
+                    tweet_like = $("<div class=tweet-like>" +
+                        "<i class='like-color fas fa-heart'></i>" +
+                        "<span class=like-count>" + tweet_likecnt + "</span>" +
+                        "</div>");
+                }
 
                 var tweet_tag;
                 var tweet_tag_wrap = $("<div class=tweet-tag-wrap></div>");
@@ -93,7 +108,7 @@ $(document).ready(function () {
                 }
 
                 if (tweet_image == null) {
-                    var user_post = $("<div class=user-post>" +
+                    var user_post = $("<div class=user-post id=" + change.doc.id + ">" +
                         "<div class=user-post-wrap>" +
                         "<img class=current-user src=" + tweet_userProfile + ">" +
                         "<div class=user-post-content>" +
@@ -105,10 +120,11 @@ $(document).ready(function () {
                         "<p class=current-user-post>" + tweet_content + "</p>" +
                         "</div>"
                     );
-                    user_post.append(tweet_tag_wrap);
+                    user_post.append(tweet_tag_wrap, tweet_like);
+
 
                 } else {
-                    var user_post = $("<div class=user-post>" +
+                    var user_post = $("<div class=user-post id=" + change.doc.id + ">" +
                         "<div class=user-post-wrap>" +
                         "<img class=current-user src=" + tweet_userProfile + ">" +
                         "<div class=user-post-content>" +
@@ -125,12 +141,14 @@ $(document).ready(function () {
                         "<img class=user-post-img src=" + tweet_image + ">" +
                         "</div>"
                     );
-                    user_post.append(tweet_tag_wrap);
+                    user_post.append(tweet_tag_wrap, tweet_like);
                 }
 
                 //加入新的推文 
                 if (change.type == "added") {
                     $("#post-container").prepend(user_post);
+                } else if (change.type == "modified") {
+                    $("#" + change.doc.id).find(".like-count").html(tweet_likecnt);
                 }
             });
         });
@@ -143,7 +161,7 @@ $(document).ready(function () {
 
             if (event.keyCode == 13 && tagMsg != '') {
                 tag.push(tagMsg);
-                $(".tag-placeholder").append("<button class=tweet-tag>" + tagMsg +"</div>");
+                $(".tag-placeholder").append("<button class=tweet-tag>" + tagMsg + "</div>");
                 $('input[type="text"]').val('');
 
                 var tagDoc = {
@@ -182,7 +200,7 @@ $(document).ready(function () {
 
                 //如果发布内容为空，提示需要输入内容
                 if (tweetContent == '') {
-                    alert('wtfsddfdfdf');
+                    $("#zero-msg-modal").fadeIn();
                     //用户上传图片并且编写信息
                 } else if (file != null && tweetContent != '') {
                     //存储照片上传的信息
@@ -205,12 +223,13 @@ $(document).ready(function () {
                                 Nickname: user_nickname,
                                 Profile: user_profile,
                                 Tag: tag,
+                                Like: parseInt(0),
                             };
                             db.collection("tweet").add(tweetData);
                             tag = [];
                         })
                     $('input[type="text"], input[type="file"], textarea').val('');
-
+                    $(".tag-placeholder").empty();
                     //用户选择只上传信息 没有图片
                 } else if (file == null && tweetContent != '') {
                     var tweetData = {
@@ -220,6 +239,7 @@ $(document).ready(function () {
                         Nickname: user_nickname,
                         Profile: user_profile,
                         Tag: tag,
+                        Like: parseInt(0),
                     };
                     db.collection("tweet").add(tweetData);
                     tag = [];
@@ -336,6 +356,14 @@ $(document).ready(function () {
             let recommend_nickname = doc.data().nickname;
             let recommend_profile = doc.data().profile;
 
+            if (recommend_nickname == null) {
+                recommend_nickname = "コート上の王様";
+            } 
+
+            if (recommend_profile == null) {
+                recommend_profile = "Resource/user.jpg";
+            } 
+
             let recommend_item = $("<div class=recommend-item>" +
                 "<img class=recommend-user src=" + recommend_profile + " width=auto height=100px>" +
                 "<div class=recommend-text-wrap>" +
@@ -348,7 +376,7 @@ $(document).ready(function () {
             $(".recommendation-block").append(recommend_item);
         });
     });
-    
+
     var tagStat = [];
     db.collection("tag").get().then(function (snap) {
         snap.forEach(function (doc) {
@@ -364,13 +392,17 @@ $(document).ready(function () {
             if (tagStat[i] != current) {
                 if (cnt > 0) {
                     console.log(current + ' 显示了' + cnt + '次');
-                    let trend_block_item = $("<div class=trend-block-item>" +
-                        "<p class=trend-block-where>Trending in Canada</p>" +
-                        "<p class=trend-block-tag>#" + current + "</p>" +
-                        "<p class=trend-block-post>" + cnt + " tweets</p>" +
-                        "</div>");
+                    //之后可以调节显示的数量
+                    if (cnt > 0) {
+                        let trend_block_item = $("<div class=trend-block-item>" +
+                            "<p class=trend-block-where>Trending in Canada</p>" +
+                            "<p class=trend-block-tag>#" + current + "</p>" +
+                            "<p class=trend-block-post>" + cnt + " tweets</p>" +
+                            "</div>");
 
-                    $(".trend-block").append(trend_block_item);
+                        $(".trend-block").append(trend_block_item);
+                    }
+
                 }
                 current = tagStat[i];
 
@@ -380,6 +412,68 @@ $(document).ready(function () {
                 cnt++;
             }
         }
+    });
+
+    //表情hover的背景色数组
+    colorList = ["#5a6a1d", "#b02b31", "#e2f929", "#6a48a7", "#499afa", "#0e7b23", "#f3c29d", "#fa60c4", "#9e7590"];
+
+    //生成表情包 &# code
+    for (var i = 128512; i <= 128580; i++) {
+        var emoji_id = i;
+        var emoji_item = $("<div class=emoji-item id=" + emoji_id + ">" + "&#" + i + "<div>");
+        $("#emoji-modal").append(emoji_item);
+    }
+
+    //鼠标hover每个表情  背景色改变动画
+    $(document).on("mouseenter", ".emoji-item", function () {
+        var random_color = colorList[Math.floor(Math.random() * colorList.length)];
+        $(this).css({
+            "background-color": random_color,
+            "transition": "background-color 0.5s"
+        });
+    });
+
+    //鼠标离开后 无背景色
+    $(document).on("mouseleave", ".emoji-item", function () {
+        $(this).css("background", "none");
+    });
+
+    //点击表情 切换开关表情板class
+    $("#emoji").click(function () {
+        $("#emoji-modal-wrap").toggleClass("close-emoji");
+    });
+
+    //选中的表情id
+    $(document).on("click", ".emoji-item", function () {
+        var selected_emoji = "&#" + $(this).attr('id');
+        document.getElementById("user-input").value += selected_emoji;
+        $("#emoji-modal-wrap").toggleClass("close-emoji");
+    });
+
+    //赞tweet 
+    $(document).on("click", ".tweet-like i", function () {
+        var selected_tweet = $(this).parent().parent().attr('id');
+
+        db.collection("tweet").doc(selected_tweet).get().then(function (doc) {
+            var likecnt = doc.data().Like + 1;
+
+            db.collection("tweet").doc(selected_tweet).update({
+                Like: likecnt
+            });
+        });
+    });
+
+    //退出没有信息发送弹出的modal
+    $("#zero-msg-btn").click(function () {
+        $("#zero-msg-modal").fadeOut();
+    });
+
+    $("#info-btn").click(function () {
+        $("#author-info-modal").fadeIn();
+    });
+
+    $("#exit-info").click(function () {
+        $("#author-info-modal").fadeOut();
     });
 
     //退出当前用户 Sign out the user from firebase

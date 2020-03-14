@@ -4,11 +4,11 @@
 }
 
 body {
-    background: linear-gradient(270deg, #44e6bc, #f95656, #56a9f9);
+    background: linear-gradient(270deg, #a0def7, #ffffff, #91d0e9);
     background-size: 600% 600%;
-    -webkit-animation: animation 30s ease infinite;
-    -moz-animation: animation 30s ease infinite;
-    animation: animation 30s ease infinite;
+    -webkit-animation: animation 15s ease infinite;
+    -moz-animation: animation 15s ease infinite;
+    animation: animation 15s ease infinite;
 }
 
 @-webkit-keyframes animation {
@@ -53,12 +53,65 @@ body {
     }
 }
 
-#firebaseui-auth-container {
-    height: 100%;
-    display: grid;
-    align-items: center;
+#twitter-logo {
+    color: #00acee;
+    font-size: 100px;
+    display: flex;
     justify-content: center;
-    grid-template-columns: 1fr;
+}
+
+.show-case {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-items: center;
+}
+
+.show-case p {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 25px;
+    font-family: 'Raleway', sans-serif;
+    color: #00acee;
+}
+
+#login-btn {
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 25px;
+    margin-top: 40px;
+    border: 1px solid #00acee;
+    color: #00acee;
+    transition: border 0.5s, color 0.5s, background-color 0.5s;
+}
+
+#login-btn:focus {
+    outline: none;
+}
+
+#login-btn:hover {
+    border: 1px solid rgba(0, 0, 0, 0);
+    color: white;
+    background-color: #00acee;
+}
+
+/* body {
+    background-color: #00acee;
+} */
+
+#firebaseui-auth-container {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
 }
 
 form {
